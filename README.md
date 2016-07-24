@@ -12,6 +12,6 @@
 </p>
 <p>
 <h5>Скриншот 1</h5>
-<img src="01.png" width="75%"/>
+<img src="res/hh.png" width="75%"/>
 </p>
 
