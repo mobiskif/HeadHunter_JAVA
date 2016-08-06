@@ -8,6 +8,7 @@ import javax.swing.JTable;
 import javax.swing.BoxLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Insets;
 import javax.swing.JToolBar;
 import java.awt.BorderLayout;
@@ -16,19 +17,19 @@ import javax.swing.JButton;
 
 @SuppressWarnings("serial")
 public class View extends JPanel {
-	private final JPanel panel_1 = new JPanel();
-	private final JPanel panel_2 = new JPanel();
-	private final JPanel panel_3 = new JPanel();
-	private final JScrollPane scrollPane_1 = new JScrollPane();
-	private final JScrollPane scrollPane_3 = new JScrollPane();
-	final JTable table_1 = new JTable();
-	final JEditorPane editPane_2 = new JEditorPane();
-	final JEditorPane editPane_3 = new JEditorPane();
+	private JPanel panel_1 = new JPanel();
+	private JPanel panel_2 = new JPanel();
+	private JPanel panel_3 = new JPanel();
+	private JScrollPane scrollPane_1 = new JScrollPane();
+	private JScrollPane scrollPane_3 = new JScrollPane();
+	private JToolBar toolBar = new JToolBar();
 	Model model;
-	private final JToolBar toolBar = new JToolBar();
-	JTextField textField_1 = new JTextField("ИТ");
-	private final JButton button = new JButton("Найти");
-	private final JTextField textField_2 = new JTextField("Санкт-Петербург", 6);
+	JTable table_1 = new JTable();
+	JEditorPane editPane_2 = new JEditorPane();
+	JEditorPane editPane_3 = new JEditorPane();
+	JButton button = new JButton("Найти");
+	JTextField textField_1 = new JTextField("IT");
+	JTextField textField_2 = new JTextField("Санкт-Петербург");
 	
 	public View(Model model) {
 		super();
@@ -44,9 +45,12 @@ public class View extends JPanel {
 		panel_1.setLayout(new BorderLayout(0, 0));
 		table_1.setName("Таблица результатов");
 		scrollPane_1.setViewportView(table_1); panel_1.add(scrollPane_1, BorderLayout.CENTER);
-		textField_2.setEnabled(false);
-		//textField_2.setcol;
 		
+		FontMetrics fm = getFontMetrics(new Font("Tahoma", Font.PLAIN, 14));
+		int[] w = fm.getWidths();
+		System.out.println(w[40]);
+		
+		textField_2.setEnabled(false);
 		toolBar.add(textField_2);
 		textField_1.setName("Поле поиска");
 		textField_1.setMargin(new Insets(2, 4, 2, 2));
@@ -71,7 +75,7 @@ public class View extends JPanel {
 		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.X_AXIS));	
 		panel_3.setMinimumSize(new Dimension(240, 350));
 		panel_3.setPreferredSize(new Dimension(240, 350));
-		editPane_3.setMargin(new Insets(3, 12, 3, 12));
+		editPane_3.setMargin(new Insets(12, 12, 12, 12));
 		editPane_3.setContentType("text/html");
 		editPane_3.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
 		editPane_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -80,21 +84,16 @@ public class View extends JPanel {
 		//panel_3.add(editPane_3);
 		add(panel_3);
 		
-		Controller c = new Controller(this);
-		table_1.addKeyListener(c);
-		table_1.addMouseListener(c);
-		table_1.setModel(model.getVacanciesListModel(textField_1.getText(),0));
-		button.addKeyListener(c);
-		button.addMouseListener(c);
-		textField_1.addKeyListener(c);
-		
 		this.model = model;
-		table_1.getColumnModel().getColumn(0).setMinWidth(75);
-		table_1.getColumnModel().getColumn(0).setMaxWidth(75);
-		table_1.getColumnModel().getColumn(1).setMaxWidth(75);
-		table_1.getColumnModel().getColumn(3).setMaxWidth(45);
-		table_1.getColumnModel().getColumn(4).setMaxWidth(45);
+		//table_1.setModel(model.getVacanciesListModel(textField_1.getText(),0));
+		table_1.setModel(model.getVacanciesList(textField_1.getText()));
 
+		model.controller.setView(this);
+		table_1.addKeyListener(model.controller);
+		table_1.addMouseListener(model.controller);
+		button.addKeyListener(model.controller);
+		button.addMouseListener(model.controller);
+		textField_1.addKeyListener(model.controller);
 	}
 
 }

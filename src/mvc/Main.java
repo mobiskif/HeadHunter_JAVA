@@ -10,9 +10,13 @@ public class Main extends Applet {
 
 	public Main() {
 		super();
+		this.setBounds(0,0, 940, 350);
+		this.setVisible(true);
 		this.add(
 				new View(
-						new Model()
+						new Model(
+								new Controller()
+						)
 				)
 		);
 	}
@@ -24,7 +28,9 @@ public class Main extends Applet {
 		f.setVisible(true);
 		f.add(
 				new View(
-						new Model()
+						new Model(
+								new Controller()
+						)
 				)
 		);
 		f.pack();
