@@ -29,7 +29,6 @@ public class Model {
 
 	public Model(Controller contr) {
 		controller = contr;
-		controller.setModel(this);	
 	}
 	
 	public DefaultTableModel getVacanciesList(String text) {
@@ -114,6 +113,7 @@ public class Model {
 
 	public void setView(View v) {
 		view = v;
+		controller.setModel(this);	
 	}
 
 	public void openVacancyInBrowser(JTable table) {
@@ -122,10 +122,6 @@ public class Model {
 		catch (IOException e1) {e1.printStackTrace();}
 	}
 	
-	public String getSearchPhrase() {
-		return view.textField_SearchPhrase.getText();
-	}
-
 	public void setVacancyDetail(JTable table) {
 		String vacancy_id	= table.getValueAt(table.getSelectedRow(), 0).toString();
 		String logo_url		= VacancyMap.get(vacancy_id).employer_logourl;

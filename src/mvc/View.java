@@ -1,27 +1,26 @@
 package mvc;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Insets;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
-import javax.swing.BoxLayout;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Insets;
-import javax.swing.JToolBar;
-import java.awt.BorderLayout;
 import javax.swing.JTextField;
-import javax.swing.JButton;
+import javax.swing.JToolBar;
 
 @SuppressWarnings("serial")
 public class View extends JPanel {
-	private JPanel panelVacancyList = new JPanel();
-	private JPanel panelVacancyDetailed = new JPanel();
-	private JPanel panelEmployerDetailed = new JPanel();
-	private JScrollPane scrollPane_Table = new JScrollPane();
-	private JScrollPane scrollPane_Employer = new JScrollPane();
+	private JPanel panelVacanciesList = new JPanel();
+	private JPanel panelVacancyDetail = new JPanel();
+	private JPanel panelEmployerDetail = new JPanel();
+	private JScrollPane scrollPane_VacanciesList = new JScrollPane();
+	private JScrollPane scrollPane_EmployerDetail = new JScrollPane();
 	private JToolBar toolBar = new JToolBar();
 	JTable table_VacanciesList = new JTable();
 	JEditorPane editPane_VacancyDetail = new JEditorPane();
@@ -39,12 +38,12 @@ public class View extends JPanel {
 		setPreferredSize(new Dimension(940, 375));
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-		panelVacancyList.setMaximumSize(new Dimension(460, 32767));
-		panelVacancyList.setPreferredSize(new Dimension(460, 350));		
-		panelVacancyList.setMinimumSize(new Dimension(460, 350));
-		panelVacancyList.setLayout(new BorderLayout(0, 0));
+		panelVacanciesList.setMaximumSize(new Dimension(460, 32767));
+		panelVacanciesList.setPreferredSize(new Dimension(460, 350));		
+		panelVacanciesList.setMinimumSize(new Dimension(460, 350));
+		panelVacanciesList.setLayout(new BorderLayout(0, 0));
 		table_VacanciesList.setName("Таблица результатов");
-		scrollPane_Table.setViewportView(table_VacanciesList); panelVacancyList.add(scrollPane_Table, BorderLayout.CENTER);
+		scrollPane_VacanciesList.setViewportView(table_VacanciesList); panelVacanciesList.add(scrollPane_VacanciesList, BorderLayout.CENTER);
 		
 		//FontMetrics fm = getFontMetrics(new Font("Tahoma", Font.PLAIN, 14));
 		//int[] w = fm.getWidths();
@@ -56,31 +55,31 @@ public class View extends JPanel {
 		toolBar.add(textField_SearchPhrase);
 		button.setName("Найти");
 		toolBar.add(button);
-		panelVacancyList.add(toolBar, BorderLayout.SOUTH);
-		add(panelVacancyList);
+		panelVacanciesList.add(toolBar, BorderLayout.SOUTH);
+		add(panelVacanciesList);
 
 		
-		panelVacancyDetailed.setLayout(new BoxLayout(panelVacancyDetailed, BoxLayout.X_AXIS));
-		panelVacancyDetailed.setMinimumSize(new Dimension(260, 350));
-		panelVacancyDetailed.setMaximumSize(new Dimension(260, 32767));
-		panelVacancyDetailed.setPreferredSize(new Dimension(260, 350));
+		panelVacancyDetail.setLayout(new BoxLayout(panelVacancyDetail, BoxLayout.X_AXIS));
+		panelVacancyDetail.setMinimumSize(new Dimension(260, 350));
+		panelVacancyDetail.setMaximumSize(new Dimension(260, 32767));
+		panelVacancyDetail.setPreferredSize(new Dimension(260, 350));
 		editPane_VacancyDetail.setMargin(new Insets(3, 12, 3, 12));
 		editPane_VacancyDetail.setContentType("text/html");
 		editPane_VacancyDetail.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
 		editPane_VacancyDetail.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panelVacancyDetailed.add(editPane_VacancyDetail);
-		add(panelVacancyDetailed);
+		panelVacancyDetail.add(editPane_VacancyDetail);
+		add(panelVacancyDetail);
 
-		panelEmployerDetailed.setLayout(new BoxLayout(panelEmployerDetailed, BoxLayout.X_AXIS));	
-		panelEmployerDetailed.setMinimumSize(new Dimension(240, 350));
-		panelEmployerDetailed.setPreferredSize(new Dimension(240, 350));
+		panelEmployerDetail.setLayout(new BoxLayout(panelEmployerDetail, BoxLayout.X_AXIS));	
+		panelEmployerDetail.setMinimumSize(new Dimension(240, 350));
+		panelEmployerDetail.setPreferredSize(new Dimension(240, 350));
 		editPane_EmployerDetail.setMargin(new Insets(12, 12, 12, 12));
 		editPane_EmployerDetail.setContentType("text/html");
 		editPane_EmployerDetail.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
 		editPane_EmployerDetail.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		scrollPane_Employer.setBorder(null);
-		scrollPane_Employer.setViewportView(editPane_EmployerDetail); panelEmployerDetailed.add(scrollPane_Employer);
-		add(panelEmployerDetailed);
+		scrollPane_EmployerDetail.setBorder(null);
+		scrollPane_EmployerDetail.setViewportView(editPane_EmployerDetail); panelEmployerDetail.add(scrollPane_EmployerDetail);
+		add(panelEmployerDetail);
 		
 		table_VacanciesList.addKeyListener(model.controller);
 		table_VacanciesList.addMouseListener(model.controller);
