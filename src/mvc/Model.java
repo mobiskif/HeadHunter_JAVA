@@ -81,7 +81,7 @@ public class Model {
 
 		Collections.sort(VacancyList, new SortByDate());
 		
-		Object[] header = { "КодВ", "Дата", "Фирма", "Работа", "Доход" };
+		Object[] header = { "ID", "Дата", "Фирма", "Работа", "Доход" };
 		Object[][] cells = new Object[VacancyList.size()][header.length];
 		int j=0;
 		for (Iterator<Vacancy> iterator = VacancyList.iterator(); iterator.hasNext();) {
