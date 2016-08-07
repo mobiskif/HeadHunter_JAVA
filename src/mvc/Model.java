@@ -1,5 +1,6 @@
 package mvc;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -115,6 +116,12 @@ public class Model {
 		view = v;
 	}
 
+	public void openVacancyInBrowser(JTable table) {
+		String vacancy_id = table.getValueAt(table.getSelectedRow(), 0).toString();
+		try {Runtime.getRuntime().exec("C:\\Program Files\\Internet Explorer\\iexplore.exe https://hh.ru/vacancy/" + vacancy_id);}
+		catch (IOException e1) {e1.printStackTrace();}
+	}
+	
 	public String getSearchPhrase() {
 		return view.textField_SearchPhrase.getText();
 	}

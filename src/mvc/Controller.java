@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 
 import javax.swing.JTable;
 
@@ -14,13 +13,6 @@ public class Controller implements KeyListener, MouseListener  {
 	public void setModel(Model m) {
 		model=m;
 	}
-
-	public void openVacancyInExplorer(JTable table) {
-		String vacancy_id = table.getValueAt(table.getSelectedRow(), 0).toString();
-		try {Runtime.getRuntime().exec("C:\\Program Files\\Internet Explorer\\iexplore.exe https://hh.ru/vacancy/" + vacancy_id);}
-		catch (IOException e1) {e1.printStackTrace();}
-	}
-	
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -45,10 +37,10 @@ public class Controller implements KeyListener, MouseListener  {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getButton() == 1 && e.getComponent().getName().equals("Найти")) 
 			model.updateModel();
-		else {
-			JTable table = (JTable)e.getSource();
-			if (e.getButton() == 1) model.setVacancyDetail(table);
-			else if (e.getButton()==2) openVacancyInExplorer(table);
+		else if (e.getButton()==1) 
+			model.setVacancyDetail((JTable)e.getSource());
+		else if (e.getButton()==2) { 
+			model.openVacancyInBrowser((JTable)e.getSource());
 		}
 	}
 
