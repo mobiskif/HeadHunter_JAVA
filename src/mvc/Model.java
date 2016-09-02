@@ -63,7 +63,7 @@ public class Model {
 						v.employer_logourl = "*";
 						try {v.employer_logourl = result.getJsonObject("employer").getJsonObject("logo_urls").get("240").toString().replace("\"", "");}
 						catch (Exception e) {}
-						v.salary = result.getJsonObject("salary").get("from").toString().replace("\"", "") + " .. " + result.getJsonObject("salary").get("to").toString().replace("\"", "");
+						v.salary = (result.getJsonObject("salary").get("from").toString().replace("\"", "") + " .. " + result.getJsonObject("salary").get("to").toString().replace("\"", "")).replace("null", "");
 						v.snippet = result.getJsonObject("snippet").get("responsibility").toString().replace("\"", "");
 
 						VacancyList.add(v);
@@ -81,7 +81,7 @@ public class Model {
 
 		Collections.sort(VacancyList, new SortByDate());
 		
-		Object[] header = { "ID", "Дата", "Фирма", "Работа", "Доход" };
+		Object[] header = { "Номер", "Дата", "Фирма", "Работа", "Доход" };
 		Object[][] cells = new Object[VacancyList.size()][header.length];
 		int j=0;
 		for (Iterator<Vacancy> iterator = VacancyList.iterator(); iterator.hasNext();) {
@@ -135,13 +135,30 @@ public class Model {
 				+ "<h3>" + salary + "</h3>" 
 				+ "<p>" + task + "</p>"
 				+ "<br/><img src=\"" + logo_url + "\" />"
-				);		
+				);
+		//view.editPane_VacancyDetail.setText(getVacancyByID(employer_id));
+		//view.editPane_VacancyDetail.setCaretPosition(0);
+		
 		view.editPane_EmployerDetail.setText(getCompanyByID(employer_id));
 		view.editPane_EmployerDetail.setCaretPosition(0);		
 	}
 
 	public void updateModel() {
 		view.table_VacanciesList.setModel(getVacanciesList(view.textField_SearchPhrase.getText()));
+	}
+
+	public String getVacancyByID(String ID) {
+		try {
+			//System.out.println(ID);
+			URL url = new URL("https://api.hh.ru/vacancies/"+ ID);
+			InputStream is = url.openStream();
+			JsonReader rdr = Json.createReader(is);
+			JsonObject obj = rdr.readObject();
+			return obj.get("description").toString().replace("\"", "");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
 	}
 		
 }

@@ -18,4 +18,9 @@ public class ModelTest {
 		DefaultTableModel result = new Model(null).getVacanciesList("водитель");
 		assertTrue(result.getColumnCount()==5);
 	}
+	@Test
+	public void testGetVacancyByID() {
+		String result = new Model(null).getVacancyByID("16477023");
+		assertTrue(result.contains("АСКОН"));
+	}
 }

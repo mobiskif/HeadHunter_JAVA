@@ -103,7 +103,7 @@ public class View extends JPanel {
 		table_VacanciesList.getColumnModel().getColumn(1).setMaxWidth(70);
 		table_VacanciesList.getColumnModel().getColumn(2).setMaxWidth(70);
 		table_VacanciesList.getColumnModel().getColumn(3).setMinWidth(70);
-		table_VacanciesList.getColumnModel().getColumn(4).setMinWidth(90);
+		table_VacanciesList.getColumnModel().getColumn(4).setMinWidth(100);
 		table_VacanciesList.getColumnModel().getColumn(4).setMaxWidth(100);
 	}
 
