@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="HeadHunter_JAVA">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/javax.json-api-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/htc.zip!/" />
+      <root url="jar://$PROJECT_DIR$/javax.json-1.0.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
