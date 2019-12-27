@@ -12,6 +12,6 @@
 </p>
 <p>
 <h5>Скриншот 1</h5>
-<img src="/res/hh.png" width="100%"/>
+<img src="https://raw.githubusercontent.com/mobiskif/hh_JAVA/master/res/hh.png" width="100%"/>
 </p>
 
