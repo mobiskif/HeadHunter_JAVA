@@ -6,8 +6,8 @@ import javax.swing.JFrame;
 import mvc.View;
 
 @SuppressWarnings("serial")
-public class Main extends Applet {
-
+public class Main { //extends Applet {
+/*
 	public Main() {
 		super();
 		this.setBounds(0,0, 940, 350);
@@ -20,7 +20,7 @@ public class Main extends Applet {
 				)
 		);
 	}
-
+*/
 	public static void main(String[] args) {
 		JFrame f = new JFrame("\"API hh.ru\" (c) Parkhimovich 2016 (" + Runtime.getRuntime().availableProcessors() + " CPU)");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
