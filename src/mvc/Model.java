@@ -32,14 +32,15 @@ public class Model {
 	}
 	
 	public DefaultTableModel getVacanciesList(String text) {
+		//https://api.hh.ru/vacancies?text=ИТ&area=2&only_with_salary=true&salary=130000&exclude_archived=true&exclude_closed=true&order_by=salary_desc&page=10
 		int page=0;
 		VacancyList = new ArrayList<Vacancy>();
 		VacancyMap= new HashMap<String,Vacancy>();
 		while (page>=0) {
 			try {
-				text = URLEncoder.encode(text, "UTF-8");
+				String txt = URLEncoder.encode(text, "UTF-8");
 				URL url = new URL("https://api.hh.ru/vacancies?text=" 
-						+ text + "&" 
+						+ txt + "&"
 						+ "area=2&" 
 						+ "only_with_salary=true&"
 						+ "salary=120000&" 
@@ -62,7 +63,7 @@ public class Model {
 						v.employer_logourl = "*";
 						try {
 							v.employer_id = result.getJsonObject("employer").get("id").toString().replace("\"", "");
-							v.employer_logourl = result.getJsonObject("employer").getJsonObject("logo_urls").get("240").toString().replace("\"", "");
+							if (result.getJsonObject("employer").getJsonObject("logo_urls").toString().length()>0) v.employer_logourl = result.getJsonObject("employer").getJsonObject("logo_urls").get("240").toString().replace("\"", "");
 						}
 						catch (Exception e) {
 							System.out.println(e);

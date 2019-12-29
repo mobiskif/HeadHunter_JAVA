@@ -27,7 +27,7 @@ public class View extends JPanel {
 	JEditorPane editPane_VacancyDetail = new JEditorPane();
 	JEditorPane editPane_EmployerDetail = new JEditorPane();
 	JButton button = new JButton("Найти");
-	JTextField textField_SearchPhrase = new JTextField("IT");
+	JTextField textField_SearchPhrase = new JTextField("ИТ");
 	JTextField textField_CitySelect = new JTextField("Санкт-Петербург");
 	
 	public View(Model model) {
