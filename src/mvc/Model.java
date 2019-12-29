@@ -58,11 +58,15 @@ public class Model {
 						v.vacancy_id = result.get("id").toString().replace("\"", "");
 						v.vacancy_name = result.get("name").toString().replace("\"", "");
 						v.published_at = result.get("published_at").toString().substring(1, 11).replace("\"", "");
-						v.employer_id = result.getJsonObject("employer").get("id").toString().replace("\"", "");
 						v.employer_name  = result.getJsonObject("employer").get("name").toString().replace("\"", "");
 						v.employer_logourl = "*";
-						try {v.employer_logourl = result.getJsonObject("employer").getJsonObject("logo_urls").get("240").toString().replace("\"", "");}
-						catch (Exception e) {}
+						try {
+							v.employer_id = result.getJsonObject("employer").get("id").toString().replace("\"", "");
+							v.employer_logourl = result.getJsonObject("employer").getJsonObject("logo_urls").get("240").toString().replace("\"", "");
+						}
+						catch (Exception e) {
+							System.out.println(e);
+						}
 						v.salary = (result.getJsonObject("salary").get("from").toString().replace("\"", "") + " .. " + result.getJsonObject("salary").get("to").toString().replace("\"", "")).replace("null", "");
 						v.snippet = result.getJsonObject("snippet").get("responsibility").toString().replace("\"", "");
 
